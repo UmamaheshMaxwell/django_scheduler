@@ -18,21 +18,21 @@ def list_jobs(parent):
     # Make the request
     page_result = client.list_jobs(request=request)
 
-    # Handle the response
-    response_data = []
+    # Process the response data
+    job_list = []
     for response in page_result:
-        response_data.append({
-            "name": response.name,
-            "http_target": response.http_target,
-            "schedule": response.schedule,
-        })
+        # Convert each job into a dictionary
+        job_data = { 
+                "name": response.name, 
+                "http_target": response.http_target, 
+                "schedule": response.schedule,
+                "description": response.description
+        }
+        job_list.append(job_data)
 
-    # You can return the list of job responses or process the data further as needed
-    return HttpResponse(response_data)
+    # Return the response as JSON
+    return JsonResponse(job_list)
 
-    # #Handle the response
-    # for response in page_result:
-    #     return HttpResponse(response)
 
 def make_job(parent):
     # Create a client
