@@ -35,33 +35,27 @@ def make_job(parent):
     location_name = f"projects/{project_id}/locations/{location_id}"
     job_name = f"projects/{project_id}/locations/{location_id}/jobs/{job_id}"
 
-    # Specify the target for the job (HTTP target in this example)
-    target = {
-        "http_target": {
-            "uri": "https://django-scheduler-3imv474m7a-uc.a.run.app/schedule/api/",
-            "http_method": "GET",
-            "headers": {
-                "User-Agent": "Google-Cloud-Scheduler"
-            }
-        }
-    }
+   # Specify the target for the job (HTTP target in this example)
+    http_target = scheduler_v1.HttpTarget(
+        uri="https://django-scheduler-3imv474m7a-uc.a.run.app/schedule/api/",
+        http_method=scheduler_v1.HttpMethod.GET,
+    )
 
     # Specify the schedule and time zone for the job
-    schedule = "0 */1 * * *"
-    time_zone = "Asia/Kolkata"  # "Asia/Kolkata" is the time zone for India (IST)
-    #time_zone = "Europe/Brussels" The time zone for Belgium is Central European Time (CET)
+    schedule = "* * * * *"  # Every minute schedule
+    time_zone = "Asia/Kolkata"  # Time zone for Tokyo, Japan
 
-    # Initialize the job with the provided target
-    job = { 
-            "name": job_name, 
-            "target": target, 
-            "schedule": schedule, 
-            "time_zone": time_zone
-        }
+    # Initialize the job with the provided target, schedule, and time zone
+    job = scheduler_v1.Job(
+        name=job_name,
+        description="managed by system",
+        http_target=http_target,
+        schedule=schedule,
+        time_zone=time_zone,
+        # Add other job configuration parameters as needed
+    )
 
-    # Initialize request argument(s) with the generated job name
-    request = scheduler_v1.CreateJobRequest(parent=location_name, job=job)
-
+    request = scheduler_v1.CreateJobRequest(parent=location_name,job=job)
     # Make the request
     response = client.create_job(request=request)
 
