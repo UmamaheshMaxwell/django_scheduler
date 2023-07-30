@@ -42,8 +42,9 @@ def make_job(parent):
     )
 
     # Specify the schedule and time zone for the job
-    schedule = "* * * * *"  # Every minute schedule
+    schedule = "0 */1 * * *"  # Every minute schedule
     time_zone = "Asia/Kolkata"  # Time zone for Tokyo, Japan
+    #time_zone = "Europe/Brussels"  # Time zone for Belgium
 
     # Initialize the job with the provided target, schedule, and time zone
     job = scheduler_v1.Job(
