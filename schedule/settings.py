@@ -4,3 +4,8 @@ import environ
 env=environ.Env()
 
 JSON_KEY_FILE_PATH = os.environ.get('JSON_KEY_FILE_PATH')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ["*"]
