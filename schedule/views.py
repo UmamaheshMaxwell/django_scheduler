@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import JsonResponse
 from google.cloud import scheduler_v1
 import os
 
@@ -16,8 +17,25 @@ def get_jobs_list(parent):
     # Make the request
     page_result = client.list_jobs(request=request)
 
+    # Process the response data
+    job_list = []
+    for response in page_result:
+        # Convert each job into a dictionary
+        job_data = { "name": response.name,  "description": response.description}
+        job_list.append(job_data)
+
+    # Return the response as JSON
+    return JsonResponse(job_list, safe=False)
+
+def sample_create_job():
+    # Create a client
+    client = scheduler_v1.CloudSchedulerClient()
+
+    # Initialize request argument(s)
+    request = scheduler_v1.CreateJobRequest(parent="projects/gcp-training-386807/locations/us-central1")
+
+    # Make the request
+    response = client.create_job(request=request)
+
     # Handle the response
-    # for response in page_result:
-    #     return HttpResponse(response)
-    response_data = [str(response) for response in page_result]
-    return HttpResponse("\n".join(response_data))
+    return HttpResponse(response)
