@@ -31,7 +31,7 @@ def list_jobs(parent):
         job_list.append(job_data)
 
     # Return the response as JSON
-    return JsonResponse(job_list)
+    return JsonResponse(job_list, safe=False)
 
 
 def make_job(parent):
