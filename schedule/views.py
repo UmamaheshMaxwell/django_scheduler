@@ -11,7 +11,7 @@ def get_jobs_list(parent):
     client = scheduler_v1.CloudSchedulerClient()
 
     # Initialize request argument(s)
-    request = scheduler_v1.ListJobsRequest(parent=parent)
+    request = scheduler_v1.ListJobsRequest(parent="projects/gcp-training-386807/locations/us-central1")
 
     # Make the request
     page_result = client.list_jobs(request=request)
