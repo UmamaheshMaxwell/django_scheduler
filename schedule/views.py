@@ -24,7 +24,7 @@ def list_jobs(parent):
         # Convert each job into a dictionary
         job_data = { 
                 "name": response.name, 
-                "http_target": response.http_target, 
+               # "http_target": response.http_target, 
                 "schedule": response.schedule,
                 "description": response.description
         }
