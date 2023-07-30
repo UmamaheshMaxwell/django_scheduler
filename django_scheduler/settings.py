@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-wa*)$&lz1&j07)-aj(y-6ldpe-82j%qf9z!#!9)eda+*$vusva
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8080',  # for localhost (Developlemt)
+    'https://django-scheduler-3imv474m7a-uc.a.run.app'
+]
 
 
 # Application definition
