@@ -17,11 +17,10 @@ def get_jobs_list(parent):
     # Make the request
     page_result = client.list_jobs(request=request)
 
-    # Handle the response
-    # for response in page_result:
-    #     return HttpResponse(response)
-    response_data = [str(response) for response in page_result]
-    return HttpResponse("\n".join(response_data))
+    #Handle the response
+    for response in page_result:
+        return HttpResponse(response)
+
 
 def sample_create_job():
     # Create a client
