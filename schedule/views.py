@@ -22,7 +22,7 @@ def list_jobs(parent):
     for response in page_result:
         return HttpResponse(response)
 
-def make_job():
+def make_job(parent):
     # Create a client
     client = scheduler_v1.CloudSchedulerClient()
 
