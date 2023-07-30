@@ -5,7 +5,7 @@ import os
 def index(request):
     return HttpResponse("Here is the page for scheduler")
 
-def get_jobs_list():
+def get_jobs_list(parent):
 
     # Create a client
     client = scheduler_v1.CloudSchedulerClient()
