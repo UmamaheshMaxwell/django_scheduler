@@ -18,9 +18,14 @@ def list_jobs(parent):
     # Make the request
     page_result = client.list_jobs(request=request)
 
-    #Handle the response
+    # Handle the response
+    job_list = []
     for response in page_result:
-        return HttpResponse(response)
+        job_list.append(response)
+
+    # You can return the list of job responses or process the data further as needed
+    return job_list
+
 
 def make_job(parent):
     # Create a client
