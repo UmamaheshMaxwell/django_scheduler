@@ -21,7 +21,7 @@ def get_jobs_list(parent):
     job_list = []
     for response in page_result:
         # Convert each job into a dictionary
-        job_data = { "name": response.name,  "description": response.description}
+        job_data = { "name": response.name,  "description": response.description, "response":response}
         job_list.append(job_data)
 
     # Return the response as JSON
