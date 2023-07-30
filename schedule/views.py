@@ -35,9 +35,27 @@ def make_job(parent):
     location_name = f"projects/{project_id}/locations/{location_id}"
     job_name = f"projects/{project_id}/locations/{location_id}/jobs/{job_id}"
 
+    # Specify the target for the job (HTTP target in this example)
+    target = {
+        "http_target": {
+            "uri": "https://django-scheduler-3imv474m7a-uc.a.run.app/schedule/api/",
+            "http_method": "GET",
+            "headers": {
+                "key": "User-Agent",
+                "value": "Google-Cloud-Scheduler"
+            }
+        }
+    }
+
+    # Initialize the job with the provided target
+    job = {
+        "name": job_name,
+        "target": target
+    }
+
 
     # Initialize request argument(s) with the generated job name
-    request = scheduler_v1.CreateJobRequest(parent=location_name, job={"name": job_name})
+    request = scheduler_v1.CreateJobRequest(parent=location_name, job=job)
 
     # Make the request
     response = client.create_job(request=request)
