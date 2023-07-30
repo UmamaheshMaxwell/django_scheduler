@@ -20,6 +20,7 @@ steps:
       - --allow-unauthenticated
       - --image=gcr.io/${PROJECT_ID}/${_SERVICE_NAME}:${COMMIT_SHA}
       - --region=${_REGION}
+      - --set-env-vars=PROJECT_ID=${PROJECT_ID},REGION=${_REGION}
       - --port=8080
       - --service-account=${_SERVICE_ACCOUNT_NAME}
       - --platform=managed
