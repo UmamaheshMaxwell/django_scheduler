@@ -18,7 +18,6 @@ def list_jobs(parent):
     # Make the request
     page_result = client.list_jobs(request=request)
 
-    page_result = client.list_jobs(request=request)
     for response in page_result:
         print(response.name)
         print(response.http_target)
