@@ -27,10 +27,17 @@ def make_job(parent):
     client = scheduler_v1.CloudSchedulerClient()
 
     # Generate a unique job name using a combination of timestamp and random string
-    job_name = f"djnago-app-job-{uuid.uuid4().hex}"
+    job_id = f"djnago-app-job-{uuid.uuid4().hex}"
+
+    # Initialize request argument(s) with the correct job name format
+    project_id = "gcp-training-386807"  # Replace with your actual project ID
+    location_id = "us-central1"  # Replace with your desired location ID
+    location_name = f"projects/{project_id}/locations/{location_id}"
+    job_name = f"projects/{project_id}/locations/{location_id}/jobs/{job_id}"
+
 
     # Initialize request argument(s) with the generated job name
-    request = scheduler_v1.CreateJobRequest(parent="projects/gcp-training-386807/locations/us-central1", job={"name": job_name})
+    request = scheduler_v1.CreateJobRequest(parent=location_name, job={"name": job_name})
 
     # Make the request
     response = client.create_job(request=request)
