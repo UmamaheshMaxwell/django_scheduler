@@ -41,18 +41,23 @@ def make_job(parent):
             "uri": "https://django-scheduler-3imv474m7a-uc.a.run.app/schedule/api/",
             "http_method": "GET",
             "headers": {
-                "key": "User-Agent",
-                "value": "Google-Cloud-Scheduler"
+                "User-Agent": "Google-Cloud-Scheduler"
             }
         }
     }
 
-    # Initialize the job with the provided target
-    job = {
-        "name": job_name,
-        "target": target
-    }
+    # Specify the schedule and time zone for the job
+    schedule = "0 */1 * * *"
+    time_zone = "Asia/Kolkata"  # "Asia/Kolkata" is the time zone for India (IST)
+    #time_zone = "Europe/Brussels" The time zone for Belgium is Central European Time (CET)
 
+    # Initialize the job with the provided target
+    job = { 
+            "name": job_name, 
+            "target": target, 
+            "schedule": schedule, 
+            "time_zone": time_zone
+        }
 
     # Initialize request argument(s) with the generated job name
     request = scheduler_v1.CreateJobRequest(parent=location_name, job=job)
