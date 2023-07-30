@@ -18,4 +18,4 @@ def get_jobs_list(parent):
 
     # Handle the response
     for response in page_result:
-        print(response)
+        return HttpResponse(response)
