@@ -17,5 +17,5 @@ def get_jobs_list():
     page_result = client.list_jobs(request=request)
 
     # Handle the response
-    for response in page_result:
-        return HttpResponse(response)
+    response_data = [str(response) for response in page_result]
+    return HttpResponse("\n".join(response_data))
