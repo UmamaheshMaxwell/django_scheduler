@@ -28,7 +28,7 @@ def list_jobs(parent):
                 "schedule": response.schedule,
                 "time_zone": response.time_zone,
                 "state": "Enabled" if response.state == 1 else "Disabled",
-                "http_method": MessageToDict(response.http_method)
+                "http_target": MessageToDict(response.http_target)
         }
         job_list.append(job_data)
 
