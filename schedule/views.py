@@ -21,13 +21,16 @@ def list_jobs(parent):
     # Process the response data
     job_list = []
     for response in page_result:
+        name, description, schedule, time_zone, state = response.values()
+        # Determine the state as "Enabled" or "Disabled" based on response.state
+        state = "Enabled" if state == 1 else "Disabled"
         # Convert each job into a dictionary
         job_data = { 
-                "name": response.name, 
-                "description": response.description,
-                "schedule": response.schedule,
-                "time_zone": response.time_zone,
-                "state": response.state,
+                "name": name, 
+                "description": description,
+                "schedule": schedule,
+                "time_zone": time_zone,
+                "state": state
                 # "http_method": response.http_method,
                 #"http_target": response.http_target.uri, 
         }
