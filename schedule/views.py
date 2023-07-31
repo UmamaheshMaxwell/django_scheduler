@@ -24,9 +24,12 @@ def list_jobs(parent):
         # Convert each job into a dictionary
         job_data = { 
                 "name": response.name, 
-               # "http_target": response.http_target, 
+                "description": response.description,
                 "schedule": response.schedule,
-                "description": response.description
+                "time_zone": response.time_zone,
+                "state": response.state,
+                "http_method": response.http_method,
+                #"http_target": response.http_target.uri, 
         }
         job_list.append(job_data)
 
