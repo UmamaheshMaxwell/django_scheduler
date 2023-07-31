@@ -28,7 +28,7 @@ def list_jobs(parent):
                 "schedule": response.schedule,
                 "time_zone": response.time_zone,
                 "state": response.state,
-                "http_method": response.http_method,
+                # "http_method": response.http_method,
                 #"http_target": response.http_target.uri, 
         }
         job_list.append(job_data)
