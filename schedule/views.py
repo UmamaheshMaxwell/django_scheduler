@@ -2,7 +2,7 @@ import uuid
 from django.http import HttpResponse
 from django.http import JsonResponse
 from google.cloud import scheduler_v1
-import os
+from google.protobuf.json_format import MessageToDict
 
 def index(request):
     return HttpResponse("Here is the page for scheduler")
@@ -27,9 +27,8 @@ def list_jobs(parent):
                 "description": response.description,
                 "schedule": response.schedule,
                 "time_zone": response.time_zone,
-                "state": "Enabled" if response.state == 1 else "Disabled"
-                # "http_method": response.http_method,
-                #"http_target": response.http_target.uri, 
+                "state": "Enabled" if response.state == 1 else "Disabled",
+                "http_method": MessageToDict(response.http_method)
         }
         job_list.append(job_data)
 
